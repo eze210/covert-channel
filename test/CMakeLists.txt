@@ -10,6 +10,9 @@ target_link_libraries(
     unit_tests
     gtest_main
     raw_udp_socket
+    regular_udp_socket
+    utils
+    address
     )
 
 add_test(

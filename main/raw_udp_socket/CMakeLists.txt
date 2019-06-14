@@ -15,15 +15,16 @@ target_sources(
         ${CMAKE_CURRENT_LIST_DIR}/raw_udp_socket.h
     )
 
-add_subdirectory(protocol)
-add_subdirectory(utils)
+add_subdirectory(header)
+add_subdirectory(packet)
 
 target_include_directories(
     raw_udp_socket
     PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}
-        ${CMAKE_CURRENT_LIST_DIR}/protocol
-        ${CMAKE_CURRENT_LIST_DIR}/utils
+        ${CMAKE_CURRENT_LIST_DIR}/header
+        ${CMAKE_CURRENT_LIST_DIR}/packet
+        ${CMAKE_CURRENT_LIST_DIR}/../utils
     )
 
-target_link_libraries(raw_udp_socket protocol utils)
+target_link_libraries(raw_udp_socket packet header utils)
