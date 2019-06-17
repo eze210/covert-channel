@@ -8,6 +8,12 @@ SocketAddress::SocketAddress(const char *ip_address, uint16_t port)
     internet_socket_address.sin_addr.s_addr = (int) this->ip_address;
 }
 
+SocketAddress::SocketAddress(struct sockaddr_in &sockaddr_in) 
+    : ip_address(sockaddr_in.sin_addr.s_addr)
+    , port(ntohs(sockaddr_in.sin_port)) {
+    internet_socket_address = sockaddr_in;    
+}
+
 const struct sockaddr_in &SocketAddress::get_linux_representation() const {
     return internet_socket_address;
 }

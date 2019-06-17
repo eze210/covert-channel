@@ -17,6 +17,7 @@ target_include_directories(
     regular_udp_socket
     PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}
+        ${CMAKE_CURRENT_LIST_DIR}/../udp_message
         ${CMAKE_CURRENT_LIST_DIR}/../utils
         ${CMAKE_CURRENT_LIST_DIR}/../address
     )

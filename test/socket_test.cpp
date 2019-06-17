@@ -2,6 +2,8 @@
 #include "ip_address.h"
 #include "raw_udp_socket.h"
 #include "socket_address.h"
+#include "udp_message.h"
+#include "udp_socket.h"
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -33,12 +35,24 @@ TEST(SocketTestCase, SocketAddressWrapper) {
 }
 
 TEST(SocketTestCase, SingleMessage) {
-    std::string payload_as_string("Mensaje");
-    Payload payload(payload_as_string);
-
     SocketAddress source_address("8.8.8.8", 5000);
     SocketAddress destination_address("127.0.0.1", 7778);
 
     RawUDPSocket source_socket;
-    source_socket.send(payload, source_address, destination_address);
+    UDPSocket destination_socket(destination_address);
+
+    std::string payload_as_string("Mensaje");
+    Payload payload(payload_as_string);
+    UDPMessage udp_message(source_address, destination_address, payload);
+    source_socket.send(udp_message);
+
+    UDPMessage received_message = destination_socket.receive();
+    const Payload &received_payload = received_message.get_payload();
+    ASSERT_EQ(payload_as_string.length(), received_payload.length());
+
+    std::string internal_string(received_payload.data(), received_payload.length());
+    ASSERT_EQ(internal_string, payload_as_string);
+
+    const SocketAddress &received_src_addr= received_message.get_source();
+    ASSERT_EQ(received_src_addr.get_port(), source_address.get_port()); 
 }

@@ -1,15 +1,13 @@
 #ifndef RAW_UDP_SOCKET_H
 #define RAW_UDP_SOCKET_H
 
-#include "datagram.h"
 #include "raw_ip_socket.h"
+#include "udp_message.h"
 
 class RawUDPSocket : public RawIPSocket {
 public:
     RawUDPSocket();
-    void send(const Payload &message,
-              const SocketAddress &source,
-              const SocketAddress &destination);
+    void send(const UDPMessage &message);
     ~RawUDPSocket();
 };
 

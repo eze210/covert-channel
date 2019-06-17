@@ -7,6 +7,7 @@ private:
 
 public:
     IPAddress(const char *address_as_cstr);
+    IPAddress(int address_as_integer);
     operator int() const;
     ~IPAddress();
 };

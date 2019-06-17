@@ -7,12 +7,12 @@ Payload::Payload(const std::string &as_string) {
     strncpy(buffer, as_string.c_str(), len);
 }
 
-Payload::Payload(size_t length) 
+Payload::Payload(uint16_t length) 
         : buffer(new char[length])
         , len(length) {
 }
 
-Payload::Payload(char *buffer, size_t length) 
+Payload::Payload(char *buffer, uint16_t length) 
         : buffer(new char[length])
         , len(length) {
     memcpy(this->buffer, buffer, length);
@@ -32,7 +32,7 @@ Payload &Payload::operator=(Payload &&other) {
     other.len = 0;
 }
 
-size_t Payload::length() const {
+uint16_t Payload::length() const {
     return len;
 }
 
@@ -47,7 +47,7 @@ Payload::~Payload() {
 }
 
 Payload &Payload::operator+=(const Payload &other) {
-    size_t new_size = this->len + other.len;
+    uint16_t new_size = this->len + other.len;
     char *new_buffer = new char[new_size];
     memcpy(new_buffer, buffer, len);
     memcpy(new_buffer + len, other.buffer, other.len);

@@ -1,6 +1,17 @@
+#include "ip_header.h"
+#include "ip_packet.h"
+#include "os_exception.h"
 #include "raw_ip_socket.h"
 
 #include <iostream>
+#include <arpa/inet.h>
+#include <cstring>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <sstream>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <unistd.h>
 
 RawIPSocket::RawIPSocket() : file_descriptor(socket (AF_INET, SOCK_RAW, IPPROTO_RAW)) {
     if (file_descriptor == -1) {

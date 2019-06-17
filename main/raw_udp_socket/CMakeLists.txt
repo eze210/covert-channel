@@ -11,6 +11,7 @@ target_sources(
 
     PUBLIC
         # Add headers here
+        ${CMAKE_CURRENT_LIST_DIR}/packet/ip_packet.h
         ${CMAKE_CURRENT_LIST_DIR}/raw_ip_socket.h
         ${CMAKE_CURRENT_LIST_DIR}/raw_udp_socket.h
     )
@@ -24,6 +25,7 @@ target_include_directories(
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/header
         ${CMAKE_CURRENT_LIST_DIR}/packet
+        ${CMAKE_CURRENT_LIST_DIR}/../udp_message
         ${CMAKE_CURRENT_LIST_DIR}/../utils
     )
 
