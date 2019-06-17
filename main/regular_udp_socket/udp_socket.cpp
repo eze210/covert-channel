@@ -8,6 +8,12 @@
 #include <unistd.h>
 #include <vector>
 
+#define DEBUG 1
+#if DEBUG
+    #include <iostream>
+    #include <string>
+#endif
+
 UDPSocket::UDPSocket(SocketAddress &local_address) 
     : local_address(local_address)
     , file_descriptor(-1) {
@@ -54,6 +60,11 @@ UDPMessage UDPSocket::receive() {
     ssize_t length = recvfrom(file_descriptor,
                               v.data(), 256, 0,
                               (struct sockaddr*) &src_addr, &addrlen);
+
+#if DEBUG
+    std::string really_seen_message(v.data(), length);
+    std::cout << "Payload received: [" << really_seen_message << "]" << std::endl;
+#endif
 
     SocketAddress source(src_addr);
     Payload received_payload(v.data(), length);

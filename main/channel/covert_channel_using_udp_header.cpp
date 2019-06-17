@@ -42,8 +42,17 @@ void CovertChannelUsingUDPHeader::covert_send(uint16_t covert_short,
 }
 
 Payload CovertChannelUsingUDPHeader::receive() {
-    Payload payload;
     UDPMessage message = receiver_socket.receive();
+    const SocketAddress &source = message.get_source();
+    uint16_t length = source.get_port();
+    Payload payload(length);
+
+    for (int i = 0; i < length; ++i) {
+        UDPMessage message = receiver_socket.receive();
+        const SocketAddress &fake_source = message.get_source();
+        uint16_t actual_byte = fake_source.get_port();
+        payload[i] = actual_byte;
+    }
 
     return std::move(payload);
 }

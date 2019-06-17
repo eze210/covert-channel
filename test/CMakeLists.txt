@@ -2,6 +2,7 @@ set(CMAKE_CXX_FLAGS "-Wl,--wrap=listen ${CMAKE_CXX_FLAGS}")
 
 add_executable(
     unit_tests
+    covert_channel_test.cpp
     socket_test.cpp
     payload_test.cpp
     )
@@ -14,6 +15,7 @@ target_link_libraries(
     udp_message
     utils
     address
+    channel
     )
 
 add_test(

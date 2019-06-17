@@ -40,6 +40,10 @@ const char *Payload::data() const {
     return buffer;
 }
 
+char &Payload::operator[](int index) {
+    return buffer[index];
+}
+
 Payload::~Payload() {
     if (buffer != nullptr) {
         delete[] buffer;

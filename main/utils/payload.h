@@ -22,6 +22,7 @@ public:
     Payload &operator=(Payload &&other);
     Payload &operator+=(const Payload &other);
     uint16_t length() const;
+    char &operator[](int index);
     const char *data() const;
 };
 
